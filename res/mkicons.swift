@@ -12,7 +12,7 @@ func icon(_ size: Int, _ path: String) {
     let wd = d*0.46, win = NSRect(x: s/2 - wd/2, y: s/2 - wd/2, width: wd, height: wd)
     NSColor(deviceRed: 0.72, green: 0.90, blue: 0.10, alpha: 1).setFill(); NSBezierPath(ovalIn: win).fill()
     let p = NSMutableParagraphStyle(); p.alignment = .center
-    ("8" as NSString).draw(in: NSRect(x: win.minX, y: win.minY + wd*0.05, width: wd, height: wd*0.9), withAttributes: [.font: NSFont.boldSystemFont(ofSize: wd*0.72), .foregroundColor: NSColor.white, .paragraphStyle: p])
+    ("8" as NSString).draw(in: NSRect(x: win.minX, y: win.minY + wd*0.05, width: wd, height: wd*0.9), withAttributes: [.font: NSFont.boldSystemFont(ofSize: wd*0.72), .foregroundColor: NSColor(deviceRed: 0.18, green: 0.30, blue: 0.03, alpha: 1), .paragraphStyle: p])
     NSGraphicsContext.restoreGraphicsState(); save(rep, path)
 }
 icon(57, "Icon.png"); icon(114, "Icon@2x.png"); icon(256, "Icon-preview.png")
