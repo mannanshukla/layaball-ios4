@@ -65,7 +65,7 @@
 
 @implementation LBStyle
 + (UIColor *)lime { return [UIColor colorWithRed:0xAF/255.0 green:0xE2/255.0 blue:0x04/255.0 alpha:1]; }
-+ (UIColor *)olive { return [UIColor colorWithRed:0x4D/255.0 green:0x7C/255.0 blue:0x0F/255.0 alpha:1]; }
++ (UIColor *)olive { return [UIColor colorWithRed:0x14/255.0 green:0x8C/255.0 blue:0x7E/255.0 alpha:1]; }
 + (UIColor *)paper { return [UIColor colorWithRed:0.95 green:0.95 blue:0.93 alpha:1]; }
 + (UIImage *)buttonImage:(UIColor *)top bottom:(UIColor *)bottom border:(UIColor *)border {
     CGSize sz = CGSizeMake(40, 40);
