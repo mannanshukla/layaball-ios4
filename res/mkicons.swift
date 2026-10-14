@@ -1,19 +1,18 @@
 import AppKit
 func bitmap(_ w: Int, _ h: Int) -> NSBitmapImageRep { return NSBitmapImageRep(bitmapDataPlanes: nil, pixelsWide: w, pixelsHigh: h, bitsPerSample: 8, samplesPerPixel: 4, hasAlpha: true, isPlanar: false, colorSpaceName: .deviceRGB, bytesPerRow: 0, bitsPerPixel: 0)! }
 func save(_ rep: NSBitmapImageRep, _ path: String) { try! rep.representation(using: .png, properties: [:])!.write(to: URL(fileURLWithPath: path)) }
-// app icon: lime background, glossy black 8-ball
+// app icon: lime background, monochrome white 8-ball glyph (matches the train on Next Train)
 func icon(_ size: Int, _ path: String) {
     let rep = bitmap(size, size); NSGraphicsContext.saveGraphicsState(); NSGraphicsContext.current = NSGraphicsContext(bitmapImageRep: rep)
     let s = CGFloat(size)
     NSGradient(starting: NSColor(deviceRed: 0.79, green: 0.94, blue: 0.23, alpha: 1), ending: NSColor(deviceRed: 0.69, green: 0.89, blue: 0.02, alpha: 1))!.draw(in: NSRect(x: 0, y: 0, width: s, height: s), angle: -90)
-    let d = s*0.74, ball = NSRect(x: (s-d)/2, y: (s-d)/2, width: d, height: d)
-    let sh = NSShadow(); sh.shadowOffset = NSSize(width: 0, height: -s*0.03); sh.shadowBlurRadius = s*0.05; sh.shadowColor = NSColor(white: 0, alpha: 0.4); sh.set()
-    NSColor.black.setFill(); NSBezierPath(ovalIn: ball).fill(); NSShadow().set()
-    NSGradient(colors: [NSColor(white: 0.45, alpha: 1), NSColor(white: 0.05, alpha: 1), NSColor.black])!.draw(in: NSBezierPath(ovalIn: ball), relativeCenterPosition: NSPoint(x: -0.4, y: 0.5))
+    let d = s*0.70, ball = NSRect(x: (s-d)/2, y: (s-d)/2, width: d, height: d)
+    NSColor(white: 0, alpha: 0.18).setFill(); NSBezierPath(ovalIn: ball.offsetBy(dx: 0, dy: -s*0.015)).fill()
+    NSColor.white.setFill(); NSBezierPath(ovalIn: ball).fill()
     let wd = d*0.46, win = NSRect(x: s/2 - wd/2, y: s/2 - wd/2, width: wd, height: wd)
-    NSColor.white.setFill(); NSBezierPath(ovalIn: win).fill()
+    NSColor(deviceRed: 0.72, green: 0.90, blue: 0.10, alpha: 1).setFill(); NSBezierPath(ovalIn: win).fill()
     let p = NSMutableParagraphStyle(); p.alignment = .center
-    ("8" as NSString).draw(in: NSRect(x: win.minX, y: win.minY + wd*0.05, width: wd, height: wd*0.9), withAttributes: [.font: NSFont.boldSystemFont(ofSize: wd*0.72), .foregroundColor: NSColor.black, .paragraphStyle: p])
+    ("8" as NSString).draw(in: NSRect(x: win.minX, y: win.minY + wd*0.05, width: wd, height: wd*0.9), withAttributes: [.font: NSFont.boldSystemFont(ofSize: wd*0.72), .foregroundColor: NSColor.white, .paragraphStyle: p])
     NSGraphicsContext.restoreGraphicsState(); save(rep, path)
 }
 icon(57, "Icon.png"); icon(114, "Icon@2x.png"); icon(256, "Icon-preview.png")
