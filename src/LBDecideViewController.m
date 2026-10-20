@@ -1,9 +1,9 @@
 #import "LBDecideViewController.h"
 
 @implementation LBBarsView
-- (id)initWithFrame:(CGRect)f { if ((self = [super initWithFrame:f])) { self.backgroundColor = [UIColor clearColor]; self.opaque = NO; } return self; }
+- (id)initWithFrame:(CGRect)f { if ((self = [super initWithFrame:f])) { self.backgroundColor = [UIColor clearColor]; self.opaque = NO; self.hidden = YES; } return self; }   // hidden until there are bars: an empty drawRect view still gets a full-size bitmap
 - (void)dealloc { [labels release]; [probs release]; [winner release]; [super dealloc]; }
-- (void)setLabels:(NSArray *)l probs:(NSDictionary *)p winner:(NSString *)w { [labels release]; labels = [l retain]; [probs release]; probs = [p retain]; [winner release]; winner = [w copy]; [self setNeedsDisplay]; }
+- (void)setLabels:(NSArray *)l probs:(NSDictionary *)p winner:(NSString *)w { [labels release]; labels = [l retain]; [probs release]; probs = [p retain]; [winner release]; winner = [w copy]; self.hidden = !labels; [self setNeedsDisplay]; }
 - (void)drawRect:(CGRect)rect {
     if (!labels) return;
     CGFloat y = 4, rowH = 26, w = self.bounds.size.width;
